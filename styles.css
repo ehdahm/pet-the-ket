@@ -1,0 +1,57 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* create 3 lanes */
+  grid-gap: 10px;
+  justify-items: center;
+}
+
+.grid-item {
+  background-color: #f0f0f0;
+  padding: 0px;
+  text-align: center;
+  height: 100px;
+  width: 100px;
+  border: 1px solid #ddd;
+}
+
+#gameInfo {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+#score,
+#timer {
+  font-size: 24px;
+}
+
+#startGameBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cat {
+  border-radius: 50%;
+  background-color: blue;
+}
+
+.cat-stage-1 {
+  border-radius: 50%;
+  background-color: red;
+}
+
+.cat-stage-2 {
+  border-radius: 50%;
+  background-color: purple;
+}
+
+.cat-stage-3 {
+  border-radius: 50%;
+  background-color: green;
+}
+
+.cat-stage-4 {
+  border-radius: 50%;
+  background-color: yellow;
+}
