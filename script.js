@@ -1,7 +1,7 @@
 /*----- constants -----*/
 const rows = 8;
 const columns = 3;
-let catPositions = []; // Hold {row, col} objects for each cat
+let catPositions = []; // Hold {row, col,} objects for each cat
 let catPointValue; // Holds the value of each cat
 let catsPetted; // Holds the number of cats petted (Defines point system)
 
@@ -167,7 +167,7 @@ function moveAllCatsDown() {
 
   // Add a new cat to a random column in the top row
   const newCatCol = Math.floor(Math.random() * columns);
-  catPositions.push({ row: 0, col: newCatCol });
+  catPositions.push({ row: 0, col: newCatCol, color: "cat0" });
   catsCreated++;
   console.log(`catCreatedCount = ${catsCreated}`);
 }
@@ -183,9 +183,8 @@ function renderBoard() {
       // Check if there's a cat at this position, from Model
       if (catPositions.some((cat) => cat.row === i && cat.col === j)) {
         // NEW CONDITIONS TO CHANGE CAT COLOR -> this doesnt work well, will add to the add new cat to top row function
-        divEl.classList.add("cat");
+        divEl.classList.add("cat"); // Default class for blue cats
       }
-
       board.appendChild(divEl);
     }
   }
