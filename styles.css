@@ -1,23 +1,35 @@
+body {
+  position: relative; /* Set positioning context for absolute positioning */
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  margin: 0; /* Reset default margin */
+  background-color: #fff; /* Optional: Set a background color */
+}
+
 .container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* create 3 lanes */
-  grid-gap: 10px;
-  justify-items: center;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 15px;
+  position: relative; /* Ensures container is stacked above lanes */
+  z-index: 2; /* Higher z-index to be on top */
 }
 
 .grid-item {
-  background-color: #f0f0f0;
-  padding: 0px;
-  text-align: center;
-  height: 100px;
-  width: 100px;
-  border: 1px solid #ddd;
+  background-color: rgba(240, 240, 240, 0.9); /* Semi-transparent */
+  height: 80px;
+  width: 80px;
+  border-radius: 10px; /* Optional: rounded corners */
 }
 
 #gameInfo {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
+  justify-content: space-evenly;
+  width: 100%;
+  position: absolute; /* Ensure game info is above everything */
+  top: 0;
+  padding-top: 30px;
+  z-index: 3; /* Ensures game info is readable */
 }
 
 #score,

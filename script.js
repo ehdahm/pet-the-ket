@@ -9,24 +9,42 @@ let catsPetted; // Holds the number of cats petted (Defines point system)
 let catsCreated; // when board is rendered, start at 8 and increment, when cats is at 50, change the color.
 
 /*----- state variables -----*/
+
 let canPressKey; // Allow players to press key
 let score = 0; // Track score
+let color = '';
 let timer; // Declare timer
 
 /*----- cached elements  -----*/
-const board = document.querySelector(".container");
-const startButton = document.getElementById("startGameBtn");
-const scoreDisplay = document.querySelector("#score");
-const timerDisplay = document.getElementById("timer");
+const board = document.querySelector('.container');
+const startButton = document.getElementById('startGameBtn');
+const scoreDisplay = document.querySelector('#score');
+const timerDisplay = document.getElementById('timer');
 
 /*----- event listeners -----*/
-document.addEventListener("keydown", handleKeyPress);
-startButton.addEventListener("click", function () {
+document.addEventListener('keydown', handleKeyPress);
+startButton.addEventListener('click', function () {
   startGame(); // Initialize game
   startTimer(); // Start the timer
   this.disabled = true; // Disable start button
 });
 /*----- functions -----*/
+class Cat {
+  constructor(row, col, catColor) {
+    this.row = row;
+    this.col = col;
+    this._catColor = catColor;
+  }
+
+  get catColor() {
+    return this._catColor;
+  }
+
+  set catColor(color) {
+    this._catColor = color;
+  }
+}
+
 function startGame() {
   setStartState();
   console.log(catsPetted);
@@ -67,7 +85,7 @@ function resetState() {
   // Disable key press
   canPressKey = false;
   // Clear the board
-  board.innerHTML = "";
+  board.innerHTML = '';
   // Re-enable start button
   startButton.disabled = false;
   // Display final points
@@ -81,9 +99,9 @@ function createBoard() {
 
     for (let j = 0; j < columns; j++) {
       // Create div element for each iteration
-      const divEl = document.createElement("div");
+      const divEl = document.createElement('div');
       // Add grid class
-      divEl.classList.add("grid-item");
+      divEl.classList.add('grid-item');
       // Identify each div
       divEl.id = `row-${i}-col-${j}`;
 
@@ -98,7 +116,8 @@ function initializeCats() {
   for (let i = 0; i < rows; i++) {
     // Create 1 cat in each row
     const colIdx = Math.floor(Math.random() * columns);
-    catPositions.push({ row: i, col: colIdx });
+    const newCat = new Cat(i, colIdx, determineCatColor());
+    catPositions.push(newCat);
     catsCreated = 8;
     console.log(`catsCreated = ${catsCreated}`);
   }
@@ -110,13 +129,13 @@ function handleKeyPress(e) {
 
   let colIdx = null;
   switch (e.key) {
-    case "z":
+    case 'z':
       colIdx = 0;
       break;
-    case "x":
+    case 'x':
       colIdx = 1;
       break;
-    case "c":
+    case 'c':
       colIdx = 2;
       break;
   }
@@ -167,25 +186,39 @@ function moveAllCatsDown() {
 
   // Add a new cat to a random column in the top row
   const newCatCol = Math.floor(Math.random() * columns);
-  catPositions.push({ row: 0, col: newCatCol, color: "cat0" });
+  const newSingleCat = new Cat(0, newCatCol, determineCatColor());
+  catPositions.push(newSingleCat);
   catsCreated++;
-  console.log(`catCreatedCount = ${catsCreated}`);
+  console.log(`catCreatedCount = ${catsCreated}, color = ${color}`);
 }
 
 function renderBoard() {
-  board.innerHTML = ""; // Clear the board
+  board.innerHTML = ''; // Clear the board
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
-      const divEl = document.createElement("div");
-      divEl.classList.add("grid-item");
+      const divEl = document.createElement('div');
+      divEl.classList.add('grid-item');
       divEl.id = `row-${i}-col-${j}`;
 
       // Check if there's a cat at this position, from Model
-      if (catPositions.some((cat) => cat.row === i && cat.col === j)) {
-        // NEW CONDITIONS TO CHANGE CAT COLOR -> this doesnt work well, will add to the add new cat to top row function
-        divEl.classList.add("cat"); // Default class for blue cats
+      const catAtPos = catPositions.find(
+        (cat) => cat.row === i && cat.col === j
+      );
+      console.log(catAtPos);
+      if (catAtPos) {
+        divEl.classList.add('cat'); // General class for a cat
+        divEl.style.backgroundColor = catAtPos.catColor; // Set color dynamically
+        console.log(catAtPos.color);
       }
       board.appendChild(divEl);
     }
   }
+}
+// logic to change cat colors after certain amount (denotes points)
+function determineCatColor() {
+  if (catsCreated >= 200) return 'yellow';
+  if (catsCreated >= 150) return 'green';
+  if (catsCreated >= 100) return 'purple';
+  if (catsCreated >= 50) return 'red';
+  return 'blue'; // Default color
 }
