@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cute+Font&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta
       name="viewport"
@@ -19,15 +32,30 @@
   <body>
     <!-- Display for the score and timer -->
     <div id="gameInfo">
-      <div id="score">Score: 0</div>
-      <div id="timer">Time: 45s</div>
+      <div
+        class="cute-font-regular"
+        id="score"
+      >
+        Score: 0
+      </div>
+      <div
+        class="cute-font-regular"
+        id="timer"
+      >
+        45s
+      </div>
       <!-- Start Game Button -->
-      <button id="startGameBtn">Start Game</button>
+      <button class="learn-more">Start Game</button>
     </div>
 
     <audio src="https://freesound.org/people/josefpres/sounds/730270/"></audio>
 
     <!-- Game board -->
     <div class="container"></div>
+    <div class="key-zone">
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+    </div>
   </body>
 </html>

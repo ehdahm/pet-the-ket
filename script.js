@@ -17,7 +17,7 @@ let timer; // Declare timer
 
 /*----- cached elements  -----*/
 const board = document.querySelector('.container');
-const startButton = document.getElementById('startGameBtn');
+const startButton = document.querySelector('.learn-more');
 const scoreDisplay = document.querySelector('#score');
 const timerDisplay = document.getElementById('timer');
 
@@ -71,7 +71,7 @@ function startTimer() {
     // decrement timer
     timer--;
     // update timer display
-    timerDisplay.textContent = `Time: ${timer}s`;
+    timerDisplay.textContent = `${timer}s`;
     // Timer ends logic
     if (timer <= 0) {
       console.log(catsPetted);
@@ -207,7 +207,7 @@ function renderBoard() {
       console.log(catAtPos);
       if (catAtPos) {
         divEl.classList.add('cat'); // General class for a cat
-        divEl.style.backgroundColor = catAtPos.catColor; // Set color dynamically
+        divEl.innerHTML = catAtPos.catColor; // Set color dynamically
         console.log(catAtPos.color);
       }
       board.appendChild(divEl);
@@ -216,9 +216,9 @@ function renderBoard() {
 }
 // logic to change cat colors after certain amount (denotes points)
 function determineCatColor() {
-  if (catsCreated >= 200) return 'yellow';
-  if (catsCreated >= 150) return 'green';
-  if (catsCreated >= 100) return 'purple';
-  if (catsCreated >= 50) return 'red';
-  return 'blue'; // Default color
+  if (catsCreated >= 200) return '😹';
+  if (catsCreated >= 150) return '😽';
+  if (catsCreated >= 100) return '😸';
+  if (catsCreated >= 50) return '😻';
+  return '😺'; // Default color
 }
