@@ -27,7 +27,7 @@
       defer
       src="script.js"
     ></script>
-    <title>Cat Game</title>
+    <title>Pet The Ket</title>
   </head>
   <body>
     <!-- Display for the score and timer -->
@@ -42,20 +42,43 @@
         class="cute-font-regular"
         id="timer"
       >
-        45s
+        Pet The Ket
       </div>
+
       <!-- Start Game Button -->
       <button class="learn-more">Start Game</button>
+      <div
+        id="hi-score"
+        class="cute-font-regular"
+      >
+        Hi-Score:
+        <span id="hi-score-value">0</span>
+      </div>
     </div>
 
     <audio src="https://freesound.org/people/josefpres/sounds/730270/"></audio>
 
     <!-- Game board -->
     <div class="container"></div>
-    <div class="key-zone">
-      <div class="key"></div>
-      <div class="key"></div>
-      <div class="key"></div>
+    <div class="keys">
+      <div
+        data-key="65"
+        class="key__button"
+      >
+        Z
+      </div>
+      <div
+        data-key="65"
+        class="key__button"
+      >
+        X
+      </div>
+      <div
+        data-key="65"
+        class="key__button"
+      >
+        C
+      </div>
     </div>
   </body>
 </html>

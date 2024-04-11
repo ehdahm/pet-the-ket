@@ -13,10 +13,10 @@ body {
 .container {
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  grid-column-gap: 15px;
+  grid-column-gap: 25px;
   position: absolute;
-  top: 150px;
-  padding: 30px 30px 9px 30px;
+  top: 100px;
+  padding: 30px 120px 0px 120px;
   height: 70vh;
   align-items: end;
   align-content: end;
@@ -28,37 +28,75 @@ body {
 
 .grid-item {
   background-color: rgba(255, 106, 188, 0.2);
-  height: 80px;
-  width: 80px;
-  font-size: 80px;
-  vertical-align: middle;
+  height: 60px;
+  width: 95px;
+  padding: 0px 30px 20px 30px;
+  font-size: 85px; /* Ensure the font size isn't too large for the box */
+  display: flex; /* Using flexbox to center content */
+  align-items: top; /* Center vertically */
+  justify-content: center; /* Center horizontally */
   margin-top: auto;
-  padding: 10%;
+  box-sizing: border-box; /* Include padding and border in the element's dimensions */
 }
 
-#gameInfo {
+#score {
+  position: fixed;
+  top: 30px;
+  left: 40px;
+}
+
+#timer {
+  position: fixed;
+  top: 30px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 300px;
+  text-align: center;
+  font-size: 42px;
+}
+
+#hi-score {
+  position: fixed;
+  top: 100px;
+  right: 45px;
+  font-size: 28px;
+  text-align: center;
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  padding-top: 30px;
+  flex-direction: column;
+  align-items: center;
+}
+
+#hi-score-value {
+  font-size: 36px;
+  color: #ff69b4;
 }
 
 .cute-font-regular {
   font-family: 'Cute Font', sans-serif;
-  font-size: large;
+  font-size: 36px;
   font-weight: 400;
   font-style: normal;
-  font-size: 72px;
 }
 
-.key-zone {
+/* button css */
+
+body {
+  background: -webkit-linear-gradient(
+    top,
+    #fff 0%,
+    #f2f2f2 25%,
+    rgba(#444, 0.3) 100%
+  );
+  min-height: 100vh;
+}
+
+.keys {
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  grid-column-gap: 15px;
+  grid-column-gap: 25px;
   position: absolute;
-  bottom: 70px;
+  bottom: 20px;
   padding: 30px;
   height: 3vh;
   align-items: end;
@@ -67,16 +105,54 @@ body {
   border-radius: 20px;
 }
 
-.key {
-  border-radius: 50%;
-  height: 30px;
+.key__button {
+  font-family: 'Cute Font', sans-serif;
+  font-size: 42px;
+  font-weight: 400;
+  font-style: normal;
+  box-sizing: border-box;
+  line-height: 50px;
+  text-align: center;
   width: 100px;
-  background-color: rgba(255, 106, 188, 0.6);
+  color: #555;
+  cursor: pointer;
+  margin: 0 4px;
+  height: 50px;
+  border-color: #f2f2f2;
+  border-style: solid;
+  text-shadow: 0 0.5px 1px #777, 0 2px 6px #f2f2f2;
+  border-width: 1px;
+  border-radius: 10px;
+  background: -webkit-linear-gradient(
+    top,
+    #f9f9f9 0%,
+    rgba(255, 106, 188, 0.9) 80%,
+    rgba(255, 106, 188, 0.9) 100%
+  );
+  display: inline-block;
+  transition: box-shadow 0.3s ease, transform 0.15s ease;
+  box-shadow: 0 0 1px #888, 0 1px 0 #fff, 0 6px 0 #c0c0c0,
+    0 8px 17px rgba(#444, 0.4), 2px 1px 4px rgba(#444, 0.25),
+    -2px 1px 4px rgba(#444, 0.25), 0 9px 16px rgba(#444, 0.1);
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 1px #888, 0 1px 0 #fff, 0 4px 0 #c0c0c0,
+      0 2px 35px rgba(#444, 0.3), 2px 2px 4px rgba(#444, 0.25),
+      -2px 2px 4px rgba(#444, 0.25), 0 7px 4px rgba(#444, 0.1);
+    transform: translateY(2px);
+  }
+
+  &:active {
+    box-shadow: 0 0 1px #888, 0 1px 0 #fff, 0 0 0 #c0c0c0,
+      0 0px 30px rgba(#444, 0.15), 2px 2px 4px rgba(#444, 0.25),
+      -2px 2px 4px rgba(#444, 0.25), 0 0px 4px rgba(#444, 0.25);
+    transform: translateY(4px);
+  }
 }
 
-/* button css */
 button {
-  position: relative;
+  position: fixed;
   display: inline-block;
   cursor: pointer;
   outline: none;
@@ -84,7 +160,9 @@ button {
   vertical-align: middle;
   text-decoration: none;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 10px;
+  top: 36px;
+  right: 30px;
 }
 
 button.learn-more {
