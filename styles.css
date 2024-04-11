@@ -31,12 +31,12 @@ body {
   height: 60px;
   width: 95px;
   padding: 0px 30px 20px 30px;
-  font-size: 85px; /* Ensure the font size isn't too large for the box */
-  display: flex; /* Using flexbox to center content */
-  align-items: top; /* Center vertically */
-  justify-content: center; /* Center horizontally */
+  font-size: 85px;
+  display: flex;
+  align-items: top;
+  justify-content: center;
   margin-top: auto;
-  box-sizing: border-box; /* Include padding and border in the element's dimensions */
+  box-sizing: border-box;
 }
 
 #score {
@@ -152,6 +152,7 @@ body {
 }
 
 button {
+  width: 109.7px;
   position: fixed;
   display: inline-block;
   cursor: pointer;

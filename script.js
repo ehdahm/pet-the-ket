@@ -10,6 +10,8 @@ let catPositions = []; // Hold {row, col,} objects for each cat
 let catPointValue; // Holds the value of each cat
 let catsPetted; // Holds the number of cats petted (Defines point system)
 let hiScore = 0;
+let gameStarted = false;
+let gameTimerIntervalId = null;
 
 //TRYING NOW
 let catsCreated; // when board is rendered, start at 8 and increment, when cats is at 50, change the color.
@@ -30,9 +32,14 @@ const hiScoreDisplay = document.getElementById('hi-score-value');
 /*----- event listeners -----*/
 document.addEventListener('keydown', handleKeyPress);
 startButton.addEventListener('click', function () {
-  startTimer(); // Start the timer
-  startGame(); // Initialize game
-  this.disabled = true; // Disable start button
+  if (!gameStarted) {
+    gameStarted = true;
+    startButton.textContent = 'Reset';
+    startGame(); // Initialize game
+  } else {
+    endGame();
+    startGame(); // Initialize game
+  }
 });
 /*----- functions -----*/
 class Cat {
@@ -56,6 +63,7 @@ function startGame() {
   createBoard();
   initializeCats();
   renderBoard();
+  startTimer();
 }
 // update the score
 function updateScoreDisplay() {
@@ -100,12 +108,12 @@ function startGameTimer() {
 }
 
 function endGame() {
+  clearInterval(gameTimerIntervalId);
   canPressKey = false; // Disable key presses after the game ends
   if (score > hiScore) {
     hiScore = score;
   }
   hiScoreDisplay.textContent = hiScore;
-  console.log(`Cats petted: ${catsPetted}`);
   resetState();
 }
 
@@ -113,6 +121,8 @@ function resetState() {
   countdownTimer = 3;
   timer = 30;
   board.innerHTML = '';
+  startButton.textContent = 'Start Game';
+  gameStarted = false;
   startButton.disabled = false;
   timerDisplay.textContent = `Pet The Ket`;
   scoreDisplay.textContent = `Score: ${score}`;
