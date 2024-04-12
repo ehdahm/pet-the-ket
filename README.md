@@ -67,3 +67,15 @@ O --> A
 ```
 <img width="353" alt="image" src="https://github.com/ehdahm/pet-the-ket/assets/45594732/424cdc13-1ab5-4224-858e-a180ece4362d">
 
+## Game Preview:
+
+<img width="1111" alt="image" src="https://github.com/ehdahm/pet-the-ket/assets/45594732/2642f60e-b9ac-49bf-bf09-62edb2eeeb9b">
+<img width="1111" alt="image" src="https://github.com/ehdahm/pet-the-ket/assets/45594732/4155d702-10f6-4414-981e-f2af161284f8">
+<img width="1111" alt="image" src="https://github.com/ehdahm/pet-the-ket/assets/45594732/477b17c7-6d78-4f0d-bff4-a4b82ef34e2c">
+<img width="1111" alt="image" src="https://github.com/ehdahm/pet-the-ket/assets/45594732/488a50dc-f003-4c0a-be6b-acd46a755f56">
+<img width="1109" alt="image" src="https://github.com/ehdahm/pet-the-ket/assets/45594732/596e8ea0-12b6-4455-bd1a-c5febdc9fae5">
+
+
+
+
+
