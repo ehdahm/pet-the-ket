@@ -124,10 +124,11 @@ function endGame() {
 function resetState() {
   countdownTimer = 3;
   timer = 30;
-  board.innerHTML = '';
+  canPressKey = false;
   startButton.textContent = 'Start Game';
   gameStarted = false;
   startButton.disabled = false;
+  // TODO: decide if time up! or Pet the ket on game end.
   timerDisplay.textContent = `Pet The Ket`;
   updateScoreDisplay();
   scoreDisplay.style.color = 'rgba(56, 199, 56, 0.837)';
