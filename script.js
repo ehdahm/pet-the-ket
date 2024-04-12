@@ -23,7 +23,7 @@ let catsCreated;
 
 /*----- cached elements  -----*/
 const board = document.querySelector('.container');
-const startButton = document.querySelector('.learn-more');
+const startButton = document.querySelector('.startGameBtn');
 const scoreDisplay = document.querySelector('#score');
 const timerDisplay = document.getElementById('timer');
 const hiScoreDisplay = document.getElementById('hi-score-value');

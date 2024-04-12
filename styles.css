@@ -166,7 +166,7 @@ button {
   right: 30px;
 }
 
-button.learn-more {
+button.startGameBtn {
   font-weight: 600;
   color: #382b22;
   text-transform: uppercase;
@@ -183,7 +183,7 @@ button.learn-more {
     -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
-button.learn-more::before {
+button.startGameBtn::before {
   position: absolute;
   content: '';
   width: 100%;
@@ -204,26 +204,26 @@ button.learn-more::before {
     -webkit-box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
-button.learn-more:hover {
+button.startGameBtn:hover {
   background: #ffe9e9;
   -webkit-transform: translate(0, 0.25em);
   transform: translate(0, 0.25em);
 }
 
-button.learn-more:hover::before {
+button.startGameBtn:hover::before {
   -webkit-box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
   box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
   -webkit-transform: translate3d(0, 0.5em, -1em);
   transform: translate3d(0, 0.5em, -1em);
 }
 
-button.learn-more:active {
+button.startGameBtn:active {
   background: #ffe9e9;
   -webkit-transform: translate(0em, 0.75em);
   transform: translate(0em, 0.75em);
 }
 
-button.learn-more:active::before {
+button.startGameBtn:active::before {
   -webkit-box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
   box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
   -webkit-transform: translate3d(0, 0, -1em);
