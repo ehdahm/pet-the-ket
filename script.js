@@ -35,6 +35,7 @@ startButton.addEventListener('click', function () {
     gameStarted = true;
     startButton.textContent = 'Reset';
     startGame();
+    this.disabled = true;
   } else {
     endGame();
     startGame();
