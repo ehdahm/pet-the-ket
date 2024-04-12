@@ -63,4 +63,5 @@ B --> M[Start Timer]
 M --> N{Timer > 0?}
 N -->|Yes| M
 N -->|No| O[Reset State]
+O --> A
 ```
