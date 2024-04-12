@@ -1,57 +1,231 @@
+body {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #fff;
+  background-image: url('https://img.freepik.com/free-vector/gradient-pastel-sky-background_23-2148909257.jpg?w=1480&t=st=1712753447~exp=1712754047~hmac=8fc4b4426bb0f1bd2084f237c8f03406855f93c2c33d756be41caa349b5c0ff8');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* create 3 lanes */
-  grid-gap: 10px;
+  grid-template-columns: repeat(3, 100px);
+  grid-column-gap: 25px;
+  position: absolute;
+  top: 100px;
+  padding: 30px 120px 0px 120px;
+  height: 70vh;
+  align-items: end;
+  align-content: end;
   justify-items: center;
+  align-content: start;
+  background-color: rgba(255, 106, 188, 0.2);
+  border-radius: 20px;
 }
 
 .grid-item {
-  background-color: #f0f0f0;
-  padding: 0px;
-  text-align: center;
-  height: 100px;
-  width: 100px;
-  border: 1px solid #ddd;
-}
-
-#gameInfo {
+  background-color: rgba(255, 106, 188, 0.2);
+  height: 60px;
+  width: 95px;
+  padding: 0px 30px 20px 30px;
+  font-size: 85px;
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
+  align-items: top;
+  justify-content: center;
+  margin-top: auto;
+  box-sizing: border-box;
 }
 
-#score,
+#score {
+  position: fixed;
+  top: 30px;
+  left: 40px;
+}
+
 #timer {
-  font-size: 24px;
+  position: fixed;
+  top: 30px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 300px;
+  text-align: center;
+  font-size: 42px;
 }
 
-#startGameBtn {
-  padding: 10px 20px;
-  font-size: 16px;
+#hi-score {
+  position: fixed;
+  top: 100px;
+  right: 45px;
+  font-size: 28px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#hi-score-value {
+  font-size: 36px;
+  color: #ff69b4;
+}
+
+.cute-font-regular {
+  font-family: 'Cute Font', sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* button css */
+
+body {
+  background: -webkit-linear-gradient(
+    top,
+    #fff 0%,
+    #f2f2f2 25%,
+    rgba(#444, 0.3) 100%
+  );
+  min-height: 100vh;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-column-gap: 25px;
+  position: absolute;
+  bottom: 20px;
+  padding: 30px;
+  height: 3vh;
+  align-items: end;
+  justify-items: center;
+  align-content: end;
+  border-radius: 20px;
+}
+
+.key__button {
+  font-family: 'Cute Font', sans-serif;
+  font-size: 42px;
+  font-weight: 400;
+  font-style: normal;
+  box-sizing: border-box;
+  line-height: 50px;
+  text-align: center;
+  width: 100px;
+  color: #555;
   cursor: pointer;
+  margin: 0 4px;
+  height: 50px;
+  border-color: #f2f2f2;
+  border-style: solid;
+  text-shadow: 0 0.5px 1px #777, 0 2px 6px #f2f2f2;
+  border-width: 1px;
+  border-radius: 10px;
+  background: -webkit-linear-gradient(
+    top,
+    #f9f9f9 0%,
+    rgba(255, 106, 188, 0.9) 80%,
+    rgba(255, 106, 188, 0.9) 100%
+  );
+  display: inline-block;
+  transition: box-shadow 0.3s ease, transform 0.15s ease;
+  box-shadow: 0 0 1px #888, 0 1px 0 #fff, 0 6px 0 #c0c0c0,
+    0 8px 17px rgba(#444, 0.4), 2px 1px 4px rgba(#444, 0.25),
+    -2px 1px 4px rgba(#444, 0.25), 0 9px 16px rgba(#444, 0.1);
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 1px #888, 0 1px 0 #fff, 0 4px 0 #c0c0c0,
+      0 2px 35px rgba(#444, 0.3), 2px 2px 4px rgba(#444, 0.25),
+      -2px 2px 4px rgba(#444, 0.25), 0 7px 4px rgba(#444, 0.1);
+    transform: translateY(2px);
+  }
+
+  &:active {
+    box-shadow: 0 0 1px #888, 0 1px 0 #fff, 0 0 0 #c0c0c0,
+      0 0px 30px rgba(#444, 0.15), 2px 2px 4px rgba(#444, 0.25),
+      -2px 2px 4px rgba(#444, 0.25), 0 0px 4px rgba(#444, 0.25);
+    transform: translateY(4px);
+  }
 }
 
-.cat {
-  border-radius: 50%;
-  background-color: blue;
+button {
+  width: 109.7px;
+  position: fixed;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 10px;
+  top: 36px;
+  right: 30px;
 }
 
-.cat-1 {
-  border-radius: 50%;
-  background-color: red;
+button.learn-more {
+  font-weight: 600;
+  color: #382b22;
+  text-transform: uppercase;
+  padding: 1.25em 2em;
+  background: #fff0f0;
+  border: 2px solid #b18597;
+  border-radius: 0.75em;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: background 150ms cubic-bezier(0, 0, 0.58, 1),
+    -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    background 150ms cubic-bezier(0, 0, 0.58, 1),
+    -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
-.cat-2 {
-  border-radius: 50%;
-  background-color: purple;
+button.learn-more::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #f9c4d2;
+  border-radius: inherit;
+  -webkit-box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #ffe3e2;
+  box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #ffe3e2;
+  -webkit-transform: translate3d(0, 0.75em, -1em);
+  transform: translate3d(0, 0.75em, -1em);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    box-shadow 150ms cubic-bezier(0, 0, 0.58, 1),
+    -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    -webkit-box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
-.cat-3 {
-  border-radius: 50%;
-  background-color: green;
+button.learn-more:hover {
+  background: #ffe9e9;
+  -webkit-transform: translate(0, 0.25em);
+  transform: translate(0, 0.25em);
 }
 
-.cat-4 {
-  border-radius: 50%;
-  background-color: yellow;
+button.learn-more:hover::before {
+  -webkit-box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
+  box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
+  -webkit-transform: translate3d(0, 0.5em, -1em);
+  transform: translate3d(0, 0.5em, -1em);
+}
+
+button.learn-more:active {
+  background: #ffe9e9;
+  -webkit-transform: translate(0em, 0.75em);
+  transform: translate(0em, 0.75em);
+}
+
+button.learn-more:active::before {
+  -webkit-box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
+  box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
+  -webkit-transform: translate3d(0, 0, -1em);
+  transform: translate3d(0, 0, -1em);
 }

@@ -1,9 +1,17 @@
+const clickAudio =
+  'https://cdn.freesound.org/previews/678/678248_7806746-lq.mp3';
+
+const catHissAudio =
+  'https://cdn.freesound.org/previews/661/661905_9177297-lq.mp3';
 /*----- constants -----*/
 const rows = 8;
 const columns = 3;
 let catPositions = []; // Hold {row, col,} objects for each cat
 let catPointValue; // Holds the value of each cat
 let catsPetted; // Holds the number of cats petted (Defines point system)
+let hiScore = 0;
+let gameStarted = false;
+let gameTimerIntervalId = null;
 
 //TRYING NOW
 let catsCreated; // when board is rendered, start at 8 and increment, when cats is at 50, change the color.
@@ -11,28 +19,51 @@ let catsCreated; // when board is rendered, start at 8 and increment, when cats 
 /*----- state variables -----*/
 let canPressKey; // Allow players to press key
 let score = 0; // Track score
+let color = '';
 let timer; // Declare timer
 
 /*----- cached elements  -----*/
-const board = document.querySelector(".container");
-const startButton = document.getElementById("startGameBtn");
-const scoreDisplay = document.querySelector("#score");
-const timerDisplay = document.getElementById("timer");
+const board = document.querySelector('.container');
+const startButton = document.querySelector('.learn-more');
+const scoreDisplay = document.querySelector('#score');
+const timerDisplay = document.getElementById('timer');
+const hiScoreDisplay = document.getElementById('hi-score-value');
 
 /*----- event listeners -----*/
-document.addEventListener("keydown", handleKeyPress);
-startButton.addEventListener("click", function () {
-  startGame(); // Initialize game
-  startTimer(); // Start the timer
-  this.disabled = true; // Disable start button
+document.addEventListener('keydown', handleKeyPress);
+startButton.addEventListener('click', function () {
+  if (!gameStarted) {
+    gameStarted = true;
+    startButton.textContent = 'Reset';
+    startGame(); // Initialize game
+  } else {
+    endGame();
+    startGame(); // Initialize game
+  }
 });
 /*----- functions -----*/
+class Cat {
+  constructor(row, col, catColor) {
+    this.row = row;
+    this.col = col;
+    this._catColor = catColor;
+  }
+
+  get catColor() {
+    return this._catColor;
+  }
+
+  set catColor(color) {
+    this._catColor = color;
+  }
+}
+
 function startGame() {
   setStartState();
-  console.log(catsPetted);
   createBoard();
   initializeCats();
   renderBoard();
+  startTimer();
 }
 // update the score
 function updateScoreDisplay() {
@@ -40,38 +71,62 @@ function updateScoreDisplay() {
 }
 
 function setStartState() {
-  timer = 120;
-  canPressKey = true;
+  timer = 30;
+  canPressKey = false;
   catsPetted = 0;
   score = 0;
+  scoreDisplay.textContent = `Score: ${score}`;
+  scoreDisplay.style.color = 'black';
   catsCreated = 0;
   catPointValue = 8;
 }
 
 function startTimer() {
-  const intervalId = setInterval(() => {
-    // decrement timer
-    timer--;
-    // update timer display
-    timerDisplay.textContent = `Time: ${timer}s`;
-    // Timer ends logic
-    if (timer <= 0) {
-      console.log(catsPetted);
-      clearInterval(intervalId); // Stop timer
-      resetState();
+  countdownTimer = 3;
+  timerDisplay.textContent = `${countdownTimer}...`;
+  const countdownIntervalId = setInterval(() => {
+    countdownTimer--;
+    timerDisplay.textContent = `${countdownTimer}...`;
+    if (countdownTimer <= 0) {
+      clearInterval(countdownIntervalId);
+      timerDisplay.textContent = 'Go!';
+      canPressKey = true; // Enable keypress only after countdown
+      startGameTimer(); // Start the game timer
     }
   }, 1000);
 }
 
+function startGameTimer() {
+  const gameTimerIntervalId = setInterval(() => {
+    timer--;
+    timerDisplay.textContent = `${timer}s`;
+    if (timer <= 0) {
+      clearInterval(gameTimerIntervalId);
+      endGame();
+    }
+  }, 1000);
+}
+
+function endGame() {
+  clearInterval(gameTimerIntervalId);
+  canPressKey = false; // Disable key presses after the game ends
+  if (score > hiScore) {
+    hiScore = score;
+  }
+  hiScoreDisplay.textContent = hiScore;
+  resetState();
+}
+
 function resetState() {
-  // Disable key press
-  canPressKey = false;
-  // Clear the board
-  board.innerHTML = "";
-  // Re-enable start button
+  countdownTimer = 3;
+  timer = 30;
+  board.innerHTML = '';
+  startButton.textContent = 'Start Game';
+  gameStarted = false;
   startButton.disabled = false;
-  // Display final points
-  scoreDisplay.textContent = `Final Score: ${score}`;
+  timerDisplay.textContent = `Pet The Ket`;
+  scoreDisplay.textContent = `Score: ${score}`;
+  scoreDisplay.style.color = 'rgba(56, 199, 56, 0.837)';
 }
 
 function createBoard() {
@@ -81,9 +136,9 @@ function createBoard() {
 
     for (let j = 0; j < columns; j++) {
       // Create div element for each iteration
-      const divEl = document.createElement("div");
+      const divEl = document.createElement('div');
       // Add grid class
-      divEl.classList.add("grid-item");
+      divEl.classList.add('grid-item');
       // Identify each div
       divEl.id = `row-${i}-col-${j}`;
 
@@ -98,9 +153,9 @@ function initializeCats() {
   for (let i = 0; i < rows; i++) {
     // Create 1 cat in each row
     const colIdx = Math.floor(Math.random() * columns);
-    catPositions.push({ row: i, col: colIdx });
+    const newCat = new Cat(i, colIdx, determineCatColor());
+    catPositions.push(newCat);
     catsCreated = 8;
-    console.log(`catsCreated = ${catsCreated}`);
   }
 }
 
@@ -110,13 +165,13 @@ function handleKeyPress(e) {
 
   let colIdx = null;
   switch (e.key) {
-    case "z":
+    case 'z':
       colIdx = 0;
       break;
-    case "x":
+    case 'x':
       colIdx = 1;
       break;
-    case "c":
+    case 'c':
       colIdx = 2;
       break;
   }
@@ -129,6 +184,7 @@ function handleKeyPress(e) {
 
     if (catInLastRow) {
       // If a cat is in the target column of the last row,
+      playMeowSound();
       score += catPointValue; // Increase score
       catsPetted++;
 
@@ -143,12 +199,23 @@ function handleKeyPress(e) {
         catPointValue = 1312;
       }
 
-      console.log(`catspetted: ${catsPetted}`);
       updateScoreDisplay(); // Update score display
       moveAllCatsDown();
       renderBoard(); // Re-render the board to reflect the updated model
     } else {
       // No cat in the target column of the last row - disable further key presses for X seconds
+      playHissSound();
+      const catNotInLastRow = catPositions.find((cat) => cat.row === rows - 1);
+      const previousCatColor = catNotInLastRow.catColor;
+
+      catNotInLastRow.catColor = '🙀';
+      renderBoard();
+      catNotInLastRow.catColor = previousCatColor;
+      setTimeout(() => {
+        renderBoard();
+        console.log(catNotInLastRow);
+      }, 500);
+
       canPressKey = false;
       setTimeout(() => {
         canPressKey = true; // Re-enable key presses after 1 second
@@ -167,25 +234,47 @@ function moveAllCatsDown() {
 
   // Add a new cat to a random column in the top row
   const newCatCol = Math.floor(Math.random() * columns);
-  catPositions.push({ row: 0, col: newCatCol, color: "cat0" });
+  const newSingleCat = new Cat(0, newCatCol, determineCatColor());
+  catPositions.push(newSingleCat);
   catsCreated++;
-  console.log(`catCreatedCount = ${catsCreated}`);
 }
 
 function renderBoard() {
-  board.innerHTML = ""; // Clear the board
+  board.innerHTML = ''; // Clear the board
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
-      const divEl = document.createElement("div");
-      divEl.classList.add("grid-item");
+      const divEl = document.createElement('div');
+      divEl.classList.add('grid-item');
       divEl.id = `row-${i}-col-${j}`;
 
       // Check if there's a cat at this position, from Model
-      if (catPositions.some((cat) => cat.row === i && cat.col === j)) {
-        // NEW CONDITIONS TO CHANGE CAT COLOR -> this doesnt work well, will add to the add new cat to top row function
-        divEl.classList.add("cat"); // Default class for blue cats
+      const catAtPos = catPositions.find(
+        (cat) => cat.row === i && cat.col === j
+      );
+      if (catAtPos) {
+        divEl.classList.add('cat'); // General class for a cat
+        divEl.innerHTML = catAtPos.catColor; // Set color dynamically
+        console.log(catAtPos.color);
       }
       board.appendChild(divEl);
     }
   }
+}
+// logic to change cat colors after certain amount (denotes points)
+function determineCatColor() {
+  if (catsCreated >= 200) return '😹';
+  if (catsCreated >= 150) return '😽';
+  if (catsCreated >= 100) return '😸';
+  if (catsCreated >= 50) return '😻';
+  return '😺'; // Default color
+}
+
+function playMeowSound() {
+  const audio = new Audio(clickAudio);
+  audio.play();
+}
+
+function playHissSound() {
+  const audio = new Audio(catHissAudio);
+  audio.play();
 }
