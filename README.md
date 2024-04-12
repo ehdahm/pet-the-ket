@@ -65,3 +65,5 @@ N -->|Yes| M
 N -->|No| O[Reset State]
 O --> A
 ```
+<img width="353" alt="image" src="https://github.com/ehdahm/pet-the-ket/assets/45594732/424cdc13-1ab5-4224-858e-a180ece4362d">
+
