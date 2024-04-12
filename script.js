@@ -1,3 +1,4 @@
+/*----- audio constants -----*/
 const clickAudio =
   'https://cdn.freesound.org/previews/678/678248_7806746-lq.mp3';
 
@@ -7,20 +8,18 @@ const catHissAudio =
 const rows = 8;
 const columns = 3;
 let catPositions = []; // Hold {row, col,} objects for each cat
-let catPointValue; // Holds the value of each cat
-let catsPetted; // Holds the number of cats petted (Defines point system)
-let hiScore = 0;
-let gameStarted = false;
-let gameTimerIntervalId = null;
-
-//TRYING NOW
-let catsCreated; // when board is rendered, start at 8 and increment, when cats is at 50, change the color.
 
 /*----- state variables -----*/
 let canPressKey; // Allow players to press key
 let score = 0; // Track score
 let color = '';
 let timer; // Declare timer
+let catPointValue; // Holds the value of each cat
+let catsPetted; // Holds the number of cats petted (Defines point system)
+let hiScore = 0;
+let gameStarted = false;
+const gameTimerIntervalId = null;
+let catsCreated;
 
 /*----- cached elements  -----*/
 const board = document.querySelector('.container');
@@ -35,10 +34,10 @@ startButton.addEventListener('click', function () {
   if (!gameStarted) {
     gameStarted = true;
     startButton.textContent = 'Reset';
-    startGame(); // Initialize game
+    startGame();
   } else {
     endGame();
-    startGame(); // Initialize game
+    startGame();
   }
 });
 /*----- functions -----*/
@@ -125,7 +124,7 @@ function resetState() {
   gameStarted = false;
   startButton.disabled = false;
   timerDisplay.textContent = `Pet The Ket`;
-  scoreDisplay.textContent = `Score: ${score}`;
+  updateScoreDisplay();
   scoreDisplay.style.color = 'rgba(56, 199, 56, 0.837)';
 }
 
@@ -155,7 +154,7 @@ function initializeCats() {
     const colIdx = Math.floor(Math.random() * columns);
     const newCat = new Cat(i, colIdx, determineCatColor());
     catPositions.push(newCat);
-    catsCreated = 8;
+    catsCreated++;
   }
 }
 
@@ -199,28 +198,27 @@ function handleKeyPress(e) {
         catPointValue = 1312;
       }
 
-      updateScoreDisplay(); // Update score display
+      updateScoreDisplay();
       moveAllCatsDown();
-      renderBoard(); // Re-render the board to reflect the updated model
+      renderBoard();
     } else {
       // No cat in the target column of the last row - disable further key presses for X seconds
       playHissSound();
       const catNotInLastRow = catPositions.find((cat) => cat.row === rows - 1);
       const previousCatColor = catNotInLastRow.catColor;
 
+      // fail animation
       catNotInLastRow.catColor = '🙀';
       renderBoard();
       catNotInLastRow.catColor = previousCatColor;
       setTimeout(() => {
         renderBoard();
-        console.log(catNotInLastRow);
       }, 500);
 
       canPressKey = false;
       setTimeout(() => {
-        canPressKey = true; // Re-enable key presses after 1 second
+        canPressKey = true; // Re-enable key presses after 0.5s
       }, 500);
-      console.log(canPressKey);
     }
   }
 }
@@ -239,12 +237,14 @@ function moveAllCatsDown() {
   catsCreated++;
 }
 
+//Renders the view from the model
 function renderBoard() {
   board.innerHTML = ''; // Clear the board
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
       const divEl = document.createElement('div');
       divEl.classList.add('grid-item');
+      // for identification and checking
       divEl.id = `row-${i}-col-${j}`;
 
       // Check if there's a cat at this position, from Model
@@ -252,9 +252,8 @@ function renderBoard() {
         (cat) => cat.row === i && cat.col === j
       );
       if (catAtPos) {
-        divEl.classList.add('cat'); // General class for a cat
-        divEl.innerHTML = catAtPos.catColor; // Set color dynamically
-        console.log(catAtPos.color);
+        divEl.classList.add('cat');
+        divEl.innerHTML = catAtPos.catColor; // Set cat emoji dynamically
       }
       board.appendChild(divEl);
     }
