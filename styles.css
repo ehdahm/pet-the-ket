@@ -26,6 +26,18 @@ body {
   border-radius: 20px;
 }
 
+.overlay {
+  display: flex;
+  position: absolute;
+  top: 100px;
+  padding: 30px 120px 0px 120px;
+  height: 70vh;
+  border-radius: 20px;
+  width: 350px;
+  background-color: rgba(164, 164, 164, 0.5); /* Grey color with 50% opacity */
+  z-index: 1; /* Ensure the overlay is above the container content */
+}
+
 .grid-item {
   background-color: rgba(255, 106, 188, 0.2);
   height: 60px;

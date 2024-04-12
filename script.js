@@ -27,6 +27,7 @@ const startButton = document.querySelector('.startGameBtn');
 const scoreDisplay = document.querySelector('#score');
 const timerDisplay = document.getElementById('timer');
 const hiScoreDisplay = document.getElementById('hi-score-value');
+const overlay = document.querySelector('.overlay');
 
 /*----- event listeners -----*/
 document.addEventListener('keydown', handleKeyPress);
@@ -82,6 +83,7 @@ function setStartState() {
 }
 
 function startTimer() {
+  overlay.style.display = 'flex';
   countdownTimer = 3;
   timerDisplay.textContent = `${countdownTimer}...`;
   const countdownIntervalId = setInterval(() => {
@@ -90,6 +92,7 @@ function startTimer() {
     if (countdownTimer <= 0) {
       clearInterval(countdownIntervalId);
       timerDisplay.textContent = 'Go!';
+      overlay.style.display = 'none';
       canPressKey = true; // Enable keypress only after countdown
       startGameTimer(); // Start the game timer
     }
@@ -108,6 +111,7 @@ function startGameTimer() {
 }
 
 function endGame() {
+  overlay.style.display = 'flex';
   clearInterval(gameTimerIntervalId);
   canPressKey = false; // Disable key presses after the game ends
   if (score > hiScore) {
@@ -120,10 +124,11 @@ function endGame() {
 function resetState() {
   countdownTimer = 3;
   timer = 30;
-  board.innerHTML = '';
+  canPressKey = false;
   startButton.textContent = 'Start Game';
   gameStarted = false;
   startButton.disabled = false;
+  // TODO: decide if time up! or Pet the ket on game end.
   timerDisplay.textContent = `Pet The Ket`;
   updateScoreDisplay();
   scoreDisplay.style.color = 'rgba(56, 199, 56, 0.837)';
