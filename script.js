@@ -27,6 +27,7 @@ const startButton = document.querySelector('.startGameBtn');
 const scoreDisplay = document.querySelector('#score');
 const timerDisplay = document.getElementById('timer');
 const hiScoreDisplay = document.getElementById('hi-score-value');
+const overlay = document.querySelector('.overlay');
 
 /*----- event listeners -----*/
 document.addEventListener('keydown', handleKeyPress);
@@ -35,6 +36,7 @@ startButton.addEventListener('click', function () {
     gameStarted = true;
     startButton.textContent = 'Reset';
     startGame();
+    this.disabled = true;
   } else {
     endGame();
     startGame();
@@ -81,6 +83,7 @@ function setStartState() {
 }
 
 function startTimer() {
+  overlay.style.display = 'flex';
   countdownTimer = 3;
   timerDisplay.textContent = `${countdownTimer}...`;
   const countdownIntervalId = setInterval(() => {
@@ -89,6 +92,7 @@ function startTimer() {
     if (countdownTimer <= 0) {
       clearInterval(countdownIntervalId);
       timerDisplay.textContent = 'Go!';
+      overlay.style.display = 'none';
       canPressKey = true; // Enable keypress only after countdown
       startGameTimer(); // Start the game timer
     }
@@ -107,6 +111,7 @@ function startGameTimer() {
 }
 
 function endGame() {
+  overlay.style.display = 'flex';
   clearInterval(gameTimerIntervalId);
   canPressKey = false; // Disable key presses after the game ends
   if (score > hiScore) {
