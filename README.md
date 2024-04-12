@@ -37,6 +37,7 @@ Potential future enhancements:
 
 - **Leaderboards**: Store a player name to a run
 - **Customization**: Customise keybindings, reset logic.
+- **Game modes**: Longer duration and additional key.
 
 Stay tuned for more updates and thank you for playing!
 
