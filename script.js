@@ -66,7 +66,7 @@ function startGame() {
   renderBoard();
   startTimer();
 }
-// update the score
+
 function updateScoreDisplay() {
   scoreDisplay.textContent = `Score: ${score}`;
 }
@@ -136,9 +136,6 @@ function resetState() {
 
 function createBoard() {
   for (let i = 0; i < rows; i++) {
-    // Assign 1 cat per row, to each column
-    const catLane = Math.floor(Math.random() * columns);
-
     for (let j = 0; j < columns; j++) {
       // Create div element for each iteration
       const divEl = document.createElement('div');
