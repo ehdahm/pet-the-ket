@@ -11,7 +11,7 @@ Welcome to **Pet The Ket** - a delightful game where your reflexes are tested as
 
 ## Getting Started
 
-Click here to play [Pet The Ket](https://ehdahm.github.io/pet-the-ket/)
+Game Link:[Pet The Ket](https://ehdahm.github.io/pet-the-ket/)
 
 Here's how to play:
 
