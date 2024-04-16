@@ -7,15 +7,15 @@ const catHissAudio =
 /*----- constants -----*/
 const rows = 8;
 const columns = 3;
-let catPositions = []; // Hold {row, col,} objects for each cat
+let catPositions = []; // hold {row, col,} objects for each cat
 
 /*----- state variables -----*/
-let canPressKey; // Allow players to press key
-let score = 0; // Track score
+let canPressKey;
+let score = 0;
 let color = '';
-let timer; // Declare timer
-let catPointValue; // Holds the value of each cat
-let catsPetted; // Holds the number of cats petted (Defines point system)
+let timer;
+let catPointValue; // holds the value of each cat
+let catsPetted; // holds the number of cats petted (defines point system)
 let hiScore = 0;
 let gameStarted = false;
 const gameTimerIntervalId = null;
@@ -93,8 +93,8 @@ function startTimer() {
       clearInterval(countdownIntervalId);
       timerDisplay.textContent = 'Go!';
       overlay.style.display = 'none';
-      canPressKey = true; // Enable keypress only after countdown
-      startGameTimer(); // Start the game timer
+      canPressKey = true;
+      startGameTimer();
     }
   }, 1000);
 }
@@ -113,7 +113,7 @@ function startGameTimer() {
 function endGame() {
   overlay.style.display = 'flex';
   clearInterval(gameTimerIntervalId);
-  canPressKey = false; // Disable key presses after the game ends
+  canPressKey = false;
   if (score > hiScore) {
     hiScore = score;
   }
@@ -137,23 +137,23 @@ function resetState() {
 function createBoard() {
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
-      // Create div element for each iteration
+      // create div element for each iteration
       const divEl = document.createElement('div');
-      // Add grid class
+      // add grid class
       divEl.classList.add('grid-item');
-      // Identify each div
+      // identify each div
       divEl.id = `row-${i}-col-${j}`;
 
-      // Append to container
+      // append to container
       board.appendChild(divEl);
     }
   }
 }
 
 function initializeCats() {
-  catPositions = []; // Reset / initialize cat positions
+  catPositions = []; // reset / initialize cat positions
   for (let i = 0; i < rows; i++) {
-    // Create 1 cat in each row
+    // create 1 cat in each row
     const colIdx = Math.floor(Math.random() * columns);
     const newCat = new Cat(i, colIdx, determineCatColor());
     catPositions.push(newCat);
@@ -161,9 +161,9 @@ function initializeCats() {
   }
 }
 
-//Main game logic for handling the user pressing
+//main game logic for handling the user pressing
 function handleKeyPress(e) {
-  if (!canPressKey) return; // Do nothing if key presses are currently disabled
+  if (!canPressKey) return; // do nothing if key presses are currently disabled
 
   let colIdx = null;
   switch (e.key) {
@@ -177,7 +177,7 @@ function handleKeyPress(e) {
       colIdx = 2;
       break;
   }
-  // If a key is pressed,
+  // if a key is pressed,
   if (colIdx !== null) {
     // returns true if cat is in the last row and the column matches the index (key press)
     const catInLastRow = catPositions.some(
@@ -185,9 +185,9 @@ function handleKeyPress(e) {
     );
 
     if (catInLastRow) {
-      // If a cat is in the target column of the last row,
+      // if a cat is in the target column of the last row,
       playMeowSound();
-      score += catPointValue; // Increase score
+      score += catPointValue;
       catsPetted++;
 
       // add increasing points generation after catsPetted
@@ -205,7 +205,7 @@ function handleKeyPress(e) {
       moveAllCatsDown();
       renderBoard();
     } else {
-      // No cat in the target column of the last row - disable further key presses for X seconds
+      // no cat in the target column of the last row - disable further key presses for X seconds
       playHissSound();
       const catNotInLastRow = catPositions.find((cat) => cat.row === rows - 1);
       const previousCatColor = catNotInLastRow.catColor;
@@ -220,29 +220,29 @@ function handleKeyPress(e) {
 
       canPressKey = false;
       setTimeout(() => {
-        canPressKey = true; // Re-enable key presses after 0.5s
+        canPressKey = true; // re-enable key presses after 0.5s
       }, 500);
     }
   }
 }
 
 function moveAllCatsDown() {
-  // Remove cats that are in the last row
+  // remove cats that are in the last row
   catPositions = catPositions.filter((cat) => cat.row < rows - 1);
 
-  // Move the remaining cats down by 1 row
+  // move the remaining cats down by 1 row
   catPositions.forEach((cat) => cat.row++);
 
-  // Add a new cat to a random column in the top row
+  // add a new cat to a random column in the top row
   const newCatCol = Math.floor(Math.random() * columns);
   const newSingleCat = new Cat(0, newCatCol, determineCatColor());
   catPositions.push(newSingleCat);
   catsCreated++;
 }
 
-//Renders the view from the model
+//renders the view from the model
 function renderBoard() {
-  board.innerHTML = ''; // Clear the board
+  board.innerHTML = ''; // clear the board
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
       const divEl = document.createElement('div');
@@ -250,7 +250,7 @@ function renderBoard() {
       // for identification and checking
       divEl.id = `row-${i}-col-${j}`;
 
-      // Check if there's a cat at this position, from Model
+      // check if there's a cat at this position, from Model
       const catAtPos = catPositions.find(
         (cat) => cat.row === i && cat.col === j
       );
